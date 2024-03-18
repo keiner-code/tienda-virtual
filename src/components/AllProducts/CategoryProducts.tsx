@@ -3,8 +3,16 @@ import { useCategory } from "../../hooks/useCategory";
 import { useStore } from "../../hooks/useStore";
 
 export function CategoryProducts() {
-  const { category, getAll } = useCategory((state) => state);
+  const { category, getAll, getAmountProductByIdCategory } = useCategory((state) => state);
   const currentCategory = useStore((state) => state.currentCategory);
+
+  const hadlerClick = (categoryId: number,title: string) => {
+    currentCategory({
+      categoryId,
+      title
+    });
+    getAmountProductByIdCategory(categoryId);
+  }
 
   useEffect(() => {
     getAll();
@@ -20,16 +28,13 @@ export function CategoryProducts() {
           >
             <button
               onClick={() =>
-                currentCategory({
-                  categoryId: category.categoryId,
-                  title: category.name,
-                })
+                hadlerClick(category.categoryId,category.name)
               }
               className="text-blue-600"
             >
               {category.name}
             </button>{" "}
-            <span>({category.description.length})</span>
+            <span>({getAmountProductByIdCategory(category.categoryId)})</span>
           </div>
         ))}
       </div>

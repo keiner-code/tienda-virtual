@@ -30,5 +30,5 @@ export const useProduct = create<ProductState>()((set) => ({
       })
       .catch((error) => console.error(error));
     set((state) => ({ products: (state.products = response) }));
-  },
+  }
 }));

@@ -47,6 +47,9 @@ export interface CategoryState {
   getAll: () => void;
   getAllProductsByCategoryId: (categoryId: number) => void;
   filterProduct: (letters: string) => void;
+  getPrices: () => number[];
+  filterPriceProduct: (price: number) => void;
+  getAmountProductByIdCategory: (categoryId: number) => number;
 }
 export interface CategoryType {
   categoryId: number;

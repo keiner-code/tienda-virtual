@@ -39,4 +39,21 @@ export const useCategory = create<CategoryState>()((set, get) => ({
     );
     set((state) => ({ products: (state.products = response) }));
   },
+  getPrices: () => {
+    const prices: number[] = [];
+    get().products.map((product) => {
+      prices.push(product.price);
+    });
+    return prices.sort();
+  },
+  filterPriceProduct: (price: number) => {
+    const response = get().productsFilter.filter(
+      (product) => product.price < price
+    );
+    set((state) => ({ products: (state.products = response) }));
+  },
+  getAmountProductByIdCategory: (categoryId: number) => {
+    const response = get().products.filter((product) => product.idCategory === categoryId);
+    return response.length;
+  }
 }));
